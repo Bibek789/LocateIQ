@@ -1,0 +1,24 @@
+.about-page {
+    background-color: #1a1a1a; /* A slightly lighter dark color for a change */
+}
+
+.about-hero {
+    text-align: center;
+    padding: 80px 40px;
+}
+
+.about-hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.about-content {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content h2 {
+    font-size: 36px;
+    margin-top: 40px;
+}

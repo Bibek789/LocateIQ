@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocateIQ | Dashboard</title>
+  <link rel="shortcut icon" href="logobest.png" type="image/x-icon">
+  <link rel="stylesheet" href="dashboard.css">
+  <!-- Leaflet Map CSS -->
+  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet/.css"/> -->
+  <!-- Chart.js -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+</head>
+<body>
+    
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><img src="logobest.png" alt=""></div>
+        <div>
+          <h2>LocateIQ.</h2>
+          <p>Location Intelligence</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <p>NAVIGATION</p>
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Store Management</a>
+        <a href="#">Analytics</a>
+      </nav>
+
+      <div class="user">
+        <div class="avatar">U</div>
+        <div>
+          <h4>Logistics Manager</h4>
+          <p>Optimize your supply chain</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="header">
+        <h1 id="main-header-title">Dashboard</h1>
+        <p id="main-header-subtitle">Find the optimal warehouse location for your supply chain</p>
+      </header>
+
+      <section id="dashboard-content" class="content">
+        <!-- Map -->
+        <div class="card map-card">
+          <h2>📍 Warehouse Location Map</h2>
+          <div id="map"></div>
+        </div>
+
+        <!-- Optimization Settings -->
+        <div class="card settings-card">
+          <h2>⚙️ Optimization Settings</h2>
+          <label for="criteria">Optimization Criteria</label>
+          <select id="criteria">
+            <option value="distance">Minimize Distance</option>
+            <option value="time">Minimize Time</option>
+          </select>
+
+          <div class="store-list">
+            <div class="store">
+              <input type="checkbox" checked>
+              <div>
+                <h4>Downtown Flagship</h4>
+                <p>123 Main St, New York, NY</p>
+              </div>
+              <span class="score">450</span>
+            </div>
+            <div class="store">
+              <input type="checkbox" checked>
+              <div>
+                <h4>Brooklyn Heights Store</h4>
+                <p>456 Atlantic Ave, Brooklyn, NY</p>
+              </div>
+              <span class="score">320</span>
+            </div>
+            <div class="store">
+              <input type="checkbox" checked>
+              <div>
+                <h4>Queens Plaza</h4>
+                <p>789 Queens Blvd, Flushing, NY</p>
+              </div>
+              <span class="score">280</span>
+            </div>
+          </div>
+
+          <div class="selection-summary">3 stores selected</div>
+
+          <button id="optimize-btn">🔍 Find Optimal Location</button>
+        </div>
+        
+
+        <!-- Live Data -->
+        <div class="card live-card">
+          <h2>☁️ Live Data</h2>
+          <p>Optimize a location to view live data</p>
+        </div>
+      </section>
+
+      <!-- Store Management Section -->
+     <section id="store-management-content" class="content2" style="display: none;">
+  <div class="card2">
+    <div class="store-management-header">
+      <h2>🏬 Store Management</h2>
+      <p>Manage your retail locations and store data</p>
+    </div>
+
+    <div class="store-table-container">
+      <table class="store-table">
+        <thead>
+          <tr>
+            <th>Store Name</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Downtown Flagship</td>
+            <td>123 Main St, New York, NY</td>
+            <td><span class="status-pill active">Active</span></td>
+            <td class="actions2">
+              <button class="action-btn edit-btn">✏️ Edit</button>
+              <button class="action-btn delete-btn">🗑️ Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Brooklyn Heights Store</td>
+            <td>456 Atlantic Ave, Brooklyn, NY</td>
+            <td><span class="status-pill active">Active</span></td>
+            <td class="actions2">
+              <button class="action-btn edit-btn">✏️ Edit</button>
+              <button class="action-btn delete-btn">🗑️ Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Queens Plaza</td>
+            <td>789 Queens Blvd, Flushing, NY</td>
+            <td><span class="status-pill inactive">Inactive</span></td>
+            <td class="actions2">
+              <button class="action-btn edit-btn">✏️ Edit</button>
+              <button class="action-btn delete-btn">🗑️ Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-footer">
+        <button id="add-store-btn" class="btn primary">+ Add New Store</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <!-- <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> -->
+  <script src="src/dashboard.js"></script>
+</body>
+</html>
