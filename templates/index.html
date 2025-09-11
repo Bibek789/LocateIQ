@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}LocateIQ | Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <canvas></canvas>
+    <div class="hero-content">
+        <div class="header">
+            <h1>OPTIMIZE YOUR WAREHOUSE <br> MAXIMIZE YOUR EFFICIENCY</h1>
+            <p>Discover the perfect warehouse location using AI-powered analytics,<br> 
+            real-time traffic data, and weather insights to optimize your supply chain.</p>
+        </div>
+    </div>
+    <div class="hero-img-container">
+        <div class="hero-img">
+            <img src="{{ url_for('static', filename='images/dashboard_screenshot.png') }}" alt="A screenshot of the LocateIQ dashboard interface.">
+        </div>
+    </div>
+</section>
+
+<!-- Page 2 Section -->
+<section class="page-2">
+    <div class="page-2-content">
+        <h1>Unlock the Power of Precision</h1>
+        <p>Our platform provides a suite of features designed to give you complete control and insight over your assets. From real-time tracking to in-depth analytics, we've got you covered.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📍</div>
+                <h3>Smart Location Analysis</h3>
+                <p>AI-powered algorithms analyze multiple factors to find optimal warehouse locations</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Cost<br> Optimization</h3>
+                <p>Minimize operational costs while maximizing efficiency and delivery speed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Live Delivery Simulation</h3>
+                <p>Simulate delivery routes in real-time to test different scenarios and identify efficient logistics strategies.</p>
+            </div>
+            <div class="feature-card"> 
+                <div class="icon">🚛</div> 
+                <h3>Logistics Integration</h3>
+                <p>Seamlessly integrate with existing supply chain and transportation networks.</p> 
+            </div> 
+        </div> 
+    </div> 
+</section>
+
+<!-- Advanced Capabilities Section -->
+<section class="advanced-capabilities">
+    <h2>Advanced Capabilities</h2>
+    <p>Take your warehouse optimization to the next level</p>
+    <div class="capabilities-grid">
+        <div class="capability-card">
+            <div class="icon">👥</div>
+            <h3>Multi-store Management</h3>
+            <p>Handle multiple retail locations and distribution centers simultaneously</p>
+        </div>
+        <div class="capability-card">
+            <div class="icon">📈</div>
+            <h3>Demand Forecasting</h3>
+            <p>Predict future demand patterns to optimize warehouse capacity</p>
+        </div>
+        <div class="capability-card">
+            <div class="icon">⏱</div>
+            <h3>Delivery Time Optimization</h3>
+            <p>Calculate optimal locations for fastest delivery times to customers</p>
+        </div>
+        <div class="capability-card">
+            <div class="icon">✅</div>
+            <h3>Compliance Tracking</h3>
+            <p>Ensure all locations meet regulatory and zoning requirements</p>
+        </div>
+    </div>
+</section>
+
+<!-- Call-to-Action Footer -->
+<section class="cta-footer">
+    <h2>Ready to Optimize Your Warehouse Network?</h2>
+    <p>Start your journey to smarter warehouse planning today</p>
+</section>
+{% endblock %}

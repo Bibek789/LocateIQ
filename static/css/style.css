@@ -37,7 +37,7 @@
     transform: translate(-50%, -50%);
     backdrop-filter: blur(5px);
     box-shadow: 0 0 25px rgba(56, 248, 255, 0.5), 0 0 40px rgba(56, 228, 255, 0.3);
-    pointer-events: none; /* So it doesn't interfere with other mouse events */
+    pointer-events: none;
 }
 
 #cursor h5 {
@@ -197,21 +197,12 @@ section{
 }
 
 .page-2{
-  background: #0b1120; /* dark navy */
+  background: #0b1120;
   color: #fff;
   text-align: center;
   padding: 80px 140px;
   height: fit-content;
 }
-/* .page-2 video{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-} */
 
 .page-2-content {
     position: relative;
@@ -226,13 +217,13 @@ section{
 .page-2-content > h1 {
     font-size: 2.5rem;
   font-weight: 700;
-  color: #a78bfa; /* violet */
+  color: #a78bfa;
   margin-bottom: 10px;
 }
 
 .page-2-content > p {
     font-size: 1.1rem;
-  color: #cbd5e1c2; /* gray */
+  color: #cbd5e1c2;
   margin-bottom: 50px;
 }
 
@@ -253,12 +244,12 @@ section{
 }
 .feature-card:hover {
     transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4); /* Add a subtle glow */
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
 }
 
 .feature-card .icon {
     font-size: 2rem;
-  color: #d946ef; /* pink glow */
+  color: #d946ef;
   background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
   border-radius: 50%;
   width: 60px;
@@ -280,9 +271,21 @@ section{
   color: #94a3b8;
 }
 
+.feature-card .avatar {
+    font-size: 2rem;
+    background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
 /* Advanced Capabilities Section */
 .advanced-capabilities {
-  background: #0b1120; /* dark navy */
+  background: #0b1120;
   color: #fff;
   text-align: center;
   padding: 80px 20px;
@@ -291,13 +294,13 @@ section{
 .advanced-capabilities h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #a78bfa; /* violet */
+  color: #a78bfa;
   margin-bottom: 10px;
 }
 
 .advanced-capabilities p {
   font-size: 1.1rem;
-  color: #cbd5e1; /* gray */
+  color: #cbd5e1;
   margin-bottom: 50px;
 }
 
@@ -324,7 +327,7 @@ section{
 
 .capability-card .icon {
   font-size: 2rem;
-  color: #d946ef; /* pink glow */
+  color: #d946ef;
   background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
   border-radius: 50%;
   width: 60px;
@@ -348,7 +351,7 @@ section{
 
 /* CTA Footer Section */
 .cta-footer {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6); /* gradient */
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   text-align: center;
   padding: 70px 20px;
   color: #fff;
@@ -359,7 +362,7 @@ section{
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 15px;
-  color: #4f0581; /* cyan-blue highlight */
+  color: #4f0581;
 }
 
 .cta-footer p {
@@ -454,7 +457,7 @@ canvas{
     width: 100%;
     height:100%;
     position: relative;
-    transform: translateZ(1000px); /* Adjusted for visibility without animation */
+    transform: translateZ(1000px);
     opacity: 0;
     will-change: transform, opacity;
 }
@@ -476,12 +479,12 @@ canvas{
 
 /* Contact Page Section */
 .contact-section {
-    background: #0b1120; /* dark navy */
+    background: #0b1120;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 120px 20px 80px; /* Add top padding to account for fixed nav */
+    padding: 120px 20px 80px;
     min-height: 100vh;
     box-sizing: border-box;
 }
@@ -498,15 +501,15 @@ canvas{
 
 .contact-form-container h1 {
     font-size: 2.2rem;
-    color: #a78bfa; /* violet */
+    color: #a78bfa;
     margin-bottom: 0.5rem;
 }
 
 .contact-form-container p {
     font-size: 1rem;
-    color: #cbd5e1c2; /* gray */
+    color: #cbd5e1c2;
     margin-bottom: 1.5rem;
-    text-transform: none; /* Override global p uppercase */
+    text-transform: none;
 }
 
 .form-group {
@@ -517,7 +520,7 @@ canvas{
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #d1d5db; /* light gray */
+    color: #d1d5db;
     font-weight: 500;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -527,10 +530,10 @@ canvas{
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #374151; /* gray-700 */
+    border: 1px solid #374151;
     border-radius: 8px;
-    background-color: #1f2937; /* gray-800 */
-    color: #f9fafb; /* gray-50 */
+    background-color: #1f2937;
+    color: #f9fafb;
     font-size: 1rem;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
@@ -539,7 +542,7 @@ canvas{
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #a78bfa; /* violet */
+    border-color: #a78bfa;
     box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.3);
 }
 
@@ -553,7 +556,7 @@ canvas{
     padding: 0.6rem 1.5rem;
     border: none;
     border-radius: 8px;
-    background-color: rgb(255, 208, 0); /* secondary button color */
+    background-color: rgb(255, 208, 0);
     color: var(--fg);
     font-size: 1rem;
     font-weight: bold;

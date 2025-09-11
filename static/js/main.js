@@ -36,13 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.addEventListener('resize', () => {
           setCanvasSize();
-          // Re-render the current frame after resize
           render();
         });
 
         const frameCount = 293;
         const currentFrame = (index) =>
-      `assets/frame_${(index + 1).toString().padStart(4, "0")}.jpg`;
+      `/static/images/frame_${(index + 1).toString().padStart(4, "0")}.jpg`;
 
         let images = []
         let videoFrames = { frame: 0 }

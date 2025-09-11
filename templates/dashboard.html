@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocateIQ | Dashboard</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logobest.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="{{ url_for('static', filename='images/logobest.png') }}" alt="LocateIQ logo">
+                </div>
+                <div>
+                    <h2>LocateIQ.</h2>
+                    <p>Location Intelligence</p>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <p>NAVIGATION</p>
+                <a href="#" class="nav-link active" data-section="dashboard">Dashboard</a>
+                <a href="#" class="nav-link" data-section="analytics">Analytics</a>
+                <a href="#" class="nav-link" data-section="optimization">Optimization</a>
+                <a href="#" class="nav-link" data-section="stores">Store Management</a>
+            </nav>
+
+            <div class="user">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="{{ url_for('static', filename='images/logobest.png') }}" alt="User avatar">
+                    </div>
+                    <div>
+                        <h2>LocateIQ.</h2>
+                        <p>Optimize your supply chain</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <header class="main-header">
+                <h1 id="main-header-title">Warehouse Optimizer</h1>
+                <p id="main-header-subtitle">Find the optimal warehouse location for your supply chain</p>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="content">
+                    <!-- Map -->
+                    <div class="card map-card">
+                        <h2>📍 West Bengal Warehouse & Store Map</h2>
+                        <div id="map"></div>
+                    </div>
+
+                    <!-- Optimization Settings -->
+                    <div class="card settings-card">
+                        <h2>⚙️ Optimization Settings</h2>
+                        <label for="optimization-criterion">Optimization Method</label>
+                        <select id="optimization-criterion">
+                            <option value="distance">Minimize Distance</option>
+                            <option value="cost">Minimize Cost</option>
+                            <option value="capacity">Optimize Capacity</option>
+                            <option value="ml_clustering">ML Clustering</option>
+                        </select>
+
+                        <div class="store-selection">
+                            <h3>Select Stores</h3>
+                            <div id="store-checkbox-list">
+                                <p>Loading stores...</p>
+                            </div>
+                        </div>
+
+                        <button id="find-optimal-btn">🔍 Find Optimal Location</button>
+                        <button id="load-sample-btn">📊 Load Sample Data</button>
+                    </div>
+
+                    <!-- Results Panel -->
+                    <div id="results-panel" class="card results-card hidden">
+                        <h2>📈 Optimization Results</h2>
+                        <div id="optimization-results"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="content-section">
+                <div class="analytics-grid">
+                    <div class="card chart-card">
+                        <h2>📊 Warehouse Capacity Distribution</h2>
+                        <canvas id="capacityChart"></canvas>
+                    </div>
+                    
+                    <div class="card chart-card">
+                        <h2>💰 Cost Analysis</h2>
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    
+                    <div class="card chart-card">
+                        <h2>🔗 Connectivity Analysis</h2>
+                        <canvas id="connectivityChart"></canvas>
+                    </div>
+                    
+                    <div class="card chart-card">
+                        <h2>📈 Performance Metrics</h2>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <h3 id="total-warehouses">19</h3>
+                                <p>Total Warehouses</p>
+                            </div>
+                            <div class="metric">
+                                <h3 id="total-stores">50</h3>
+                                <p>Total Stores</p>
+                            </div>
+                            <div class="metric">
+                                <h3 id="avg-capacity">12,000</h3>
+                                <p>Avg Capacity</p>
+                            </div>
+                            <div class="metric">
+                                <h3 id="avg-cost">₹12,500</h3>
+                                <p>Avg Cost</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Optimization Methods Section -->
+            <section id="optimization-section" class="content-section">
+                <div class="optimization-methods">
+                    <div class="card method-card">
+                        <h2>🎯 Distance Optimization</h2>
+                        <p>Minimizes total travel distance from warehouse to all selected stores using geodesic calculations.</p>
+                        <div class="method-details">
+                            <h4>Algorithm:</h4>
+                            <ul>
+                                <li>Calculate geodesic distance to each store</li>
+                                <li>Sum total distances for each warehouse</li>
+                                <li>Select warehouse with minimum total distance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card method-card">
+                        <h2>💰 Cost Optimization</h2>
+                        <p>Balances operational costs with transportation costs for optimal total cost.</p>
+                        <div class="method-details">
+                            <h4>Formula:</h4>
+                            <p>Total Cost = Operational Cost + (Distance × ₹50/km)</p>
+                            <ul>
+                                <li>Considers warehouse operational costs</li>
+                                <li>Adds transportation cost penalty</li>
+                                <li>Finds minimum total cost solution</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card method-card">
+                        <h2>📦 Capacity Optimization</h2>
+                        <p>Ensures warehouse capacity meets demand while minimizing distance.</p>
+                        <div class="method-details">
+                            <h4>Process:</h4>
+                            <ul>
+                                <li>Calculate total demand (100 units/store)</li>
+                                <li>Filter warehouses with sufficient capacity</li>
+                                <li>Among suitable warehouses, minimize distance</li>
+                                <li>Calculate capacity utilization percentage</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card method-card">
+                        <h2>🤖 ML Clustering Optimization</h2>
+                        <p>Uses K-means clustering to group stores and find optimal warehouse locations.</p>
+                        <div class="method-details">
+                            <h4>Machine Learning Approach:</h4>
+                            <ul>
+                                <li>Standardize store coordinates</li>
+                                <li>Apply K-means clustering algorithm</li>
+                                <li>Find cluster centers</li>
+                                <li>Match nearest warehouses to centers</li>
+                                <li>Recommend multiple warehouses for coverage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Store Management Section -->
+            <section id="stores-section" class="content-section">
+                <div class="card2">
+                    <div class="store-management-header">
+                        <h2>🏬 Store Management</h2>
+                        <p>Manage your retail locations and store data</p>
+                    </div>
+
+                    <div class="store-table-container">
+                        <table class="store-table" id="stores-table">
+                            <thead>
+                                <tr>
+                                    <th>Store Name</th>
+                                    <th>Location</th>
+                                    <th>Coordinates</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
