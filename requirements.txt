@@ -1,5 +1,8 @@
-Flask
+flask
+flask-cors
 pandas
-numpy<2.0
+numpy
 scikit-learn
+folium
+plotly
 geopy

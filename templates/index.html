@@ -18,20 +18,22 @@
                 <h5>click</h5>
             </div>
     <nav>
+        <div class="logo">
+            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logobest.png') }}" alt="LocateIQ logo">LocateIQ.</a>
+        </div>
         <div class="nav-links">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('about') }}">About Us</a>
             <a href="{{ url_for('services') }}">Services</a>
             <a href="{{ url_for('contact') }}">Contact Us</a>
         </div>
-
-        <div class="logo">
-            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logobest.png') }}" alt="LocateIQ logo">LocateIQ.</a>
-        </div>
-
         <div class="nav-buttons">
             <div class="btn primary"><a href="#">Login</a></div>
             <div class="btn secondary"><a href="{{ url_for('dashboard') }}">Get started</a></div>
+        </div>
+        <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
     </nav>
 

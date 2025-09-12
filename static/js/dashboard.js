@@ -16,6 +16,7 @@ class DashboardManager {
         this.setupNavigation();
         this.setupMap();
         this.setupModalMap();
+        this.setupSmoothScrolling();
         await this.loadData();
         this.setupEventListeners();
         this.loadAnalytics();
@@ -50,11 +51,11 @@ class DashboardManager {
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetSection = e.target.dataset.section;
+                const targetSection = e.currentTarget.dataset.section;
 
                 // Update active nav link
                 navLinks.forEach(l => l.classList.remove('active'));
-                e.target.classList.add('active');
+                e.currentTarget.classList.add('active');
 
                 // Show target section
                 sections.forEach(section => {
@@ -74,6 +75,25 @@ class DashboardManager {
                 }
             });
         });
+    }
+
+    setupSmoothScrolling() {
+        const mainContent = document.querySelector('.main');
+        if (!mainContent) return;
+
+        const lenis = new Lenis({
+            wrapper: mainContent,
+            content: mainContent, // Use main content as both wrapper and content for this specific layout
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
     }
 
     setupMap() {
@@ -303,7 +323,7 @@ class DashboardManager {
         if (result.criterion === 'ml_clustering') {
             // Handle ML clustering results
             resultsHTML = `
-                <h3>🤖 ML Clustering Results</h3>
+                <h3><i class="fas fa-brain"></i> ML Clustering Results</h3>
                 <p><strong>Algorithm:</strong> K-means clustering with ${result.warehouses.length} clusters</p>
                 <div class="clustering-results">
                     ${result.warehouses.map((warehouse, index) => `
@@ -321,7 +341,7 @@ class DashboardManager {
             // Handle single warehouse results
             const warehouse = result.warehouse;
             resultsHTML = `
-                <h3>🎯 Optimal Warehouse Found</h3>
+                <h3><i class="fas fa-trophy"></i> Optimal Warehouse Found</h3>
                 <div class="warehouse-result">
                     <h4>${warehouse.Name}</h4>
                     <p><strong>Location:</strong> ${warehouse.City}</p>
@@ -356,7 +376,8 @@ class DashboardManager {
         if (result.criterion === 'ml_clustering') {
             // Highlight recommended warehouses
             result.warehouses.forEach((warehouse, index) => {
-                
+                const colors = ['green', 'orange', 'violet'];
+                const color = colors[index % colors.length];
                 const marker = L.marker([warehouse.Latitude, warehouse.Longitude], {
                     icon: L.icon({
                         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
@@ -376,7 +397,7 @@ class DashboardManager {
                     iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
                 })
             }).bindPopup(`<b>Optimal Warehouse:</b> ${warehouse.Name}`);
-            this.markers.addLayer(marker);
+            this.optimizationLayer.addLayer(marker);
 
             // Draw lines from warehouse to selected stores
             result.selected_stores.forEach(store => {
