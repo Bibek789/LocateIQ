@@ -77,20 +77,15 @@ LocateIQ/
 │   └── warehouses.csv         # Warehouse information
 ├── templates/                 # HTML templates
 │   ├── index.html             # Landing page
-│   ├── dashboard.html         # Main dashboard
-│   ├── about.html             # About page
-│   ├── services.html          # Services page
-│   └── contact.html           # Contact page
+│   └── Optimization.html      # Main dashboard
 ├── static/
 │   ├── css/
 │   │   ├── style.css          # Main styles
-│   │   └── dashboard.css      # Dashboard styles
+│   │   └── Optimization.css   # Dashboard styles
 │   ├── js/
 │   │   ├── main.js            # Landing page scripts
 │   │   └── dashboard.js       # Dashboard functionality
 │   └── images/
-│       ├── logobest.png       # Logo
-│       └── dashboard_screenshot.png
 └── README.md                  # This file
 ```
 
