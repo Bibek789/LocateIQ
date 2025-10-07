@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocateIQ- Optimization</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/static/images/assets/favicon.png" type="image/x-icon">
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/css/optimization.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "leaflet": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>LocateIQ</h1>
+
+      <div class="input-section">
+        <div class="input-panel">
+          <h2>Add Warehouses & Stores</h2>
+          <div class="form-group">
+            <label>Name:</label>
+            <input type="text" id="nodeName" placeholder="e.g., Warehouse A or Store 1">
+          </div>
+          <div class="form-group">
+            <label>Type:</label>
+            <select id="nodeType">
+              <option value="warehouse">Warehouse</option>
+              <option value="store">Store</option>
+              <option value="junction">Junction Point</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Latitude:</label>
+            <input type="number" id="nodeLat" placeholder="e.g., 40.7128" step="0.0001">
+          </div>
+          <div class="form-group">
+            <label>Longitude:</label>
+            <input type="number" id="nodeLng" placeholder="e.g., -74.0060" step="0.0001">
+          </div>
+          <button id="addNode">Add Location</button>
+          <p class="hint">Tip: Click on the map to get coordinates</p>
+        </div>
+
+        <div class="input-panel">
+          <h2>Add Routes (Roads)</h2>
+          <div class="form-group">
+            <label>From:</label>
+            <select id="fromNode"></select>
+          </div>
+          <div class="form-group">
+            <label>To:</label>
+            <select id="toNode"></select>
+          </div>
+          <div class="form-group">
+            <label>Distance (km):</label>
+            <input type="number" id="edgeWeight" placeholder="e.g., 10" min="0.1" step="0.1">
+          </div>
+          <button id="addEdge">Add Route</button>
+        </div>
+
+        <div class="input-panel">
+          <h2>Quick Actions</h2>
+          <button id="loadSample" class="secondary-btn">Load Sample Network</button>
+          <button id="clearAll" class="secondary-btn">Clear All</button>
+          <div class="info-box">
+            <p><strong>Legend:</strong></p>
+            <p>🔵 Warehouse | 🟠 Store | ⚫ Junction</p>
+            <p>🟢 Selected Start | 🔴 Selected End</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="info">
+          <p>Click on a Warehouse (blue) and a Store (orange) markers on the map, then find the shortest route</p>
+        </div>
+        <button id="findPath">Find Shortest Route</button>
+        <button id="reset">Reset Selection</button>
+      </div>
+
+      <div id="map"></div>
+      <div id="result"></div>
+
+      <div id="locationList">
+        <h3>Network Locations</h3>
+        <div id="nodesList"></div>
+      </div>
+    </div>
+    <script type="module" src="/static/js/main.js"></script>
+  </body>
+</html>

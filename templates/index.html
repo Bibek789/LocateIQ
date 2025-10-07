@@ -1,130 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocateIQ | Home</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logobest.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- GSAP & ScrollTrigger CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Lenis Smooth Scroll CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
+    <title>LocateIQ</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/static/images/assets/favicon.png" type="image/x-icon">
+    <!-- locomotive css  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    <!-- shery css  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aayushchouhan24/sheryjs@main/dist/Shery.css" />
+    <!-- remixicon cdn  -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- css file  -->
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body>
-    <div class="main">
-        <div id="cursor">
-                <h5>click</h5>
-            </div>
-    <nav>
-        <div class="logo">
-            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logobest.png') }}" alt="LocateIQ logo">LocateIQ.</a>
-        </div>
-        <div class="nav-links">
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('about') }}">About Us</a>
-            <a href="{{ url_for('services') }}">Services</a>
-            <a href="{{ url_for('contact') }}">Contact Us</a>
-        </div>
-        <div class="nav-buttons">
-            <div class="btn primary"><a href="#">Login</a></div>
-            <div class="btn secondary"><a href="{{ url_for('dashboard') }}">Get started</a></div>
-        </div>
-        <div class="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <canvas></canvas>
-        <div class="hero-content">
-            <div class="header">
-                <h1>OPTIMIZE YOUR WAREHOUSE <br> MAXIMIZE YOUR EFFICIENCY</h1>
-                <p>Discover the perfect warehouse location using AI-powered analytics,<br> 
-                real-time traffic data, and weather insights to optimize your supply chain.</p>
+    <div id="loader">
+        <div class="line">
+            <div id="line1-part1">
+                <h5>00</h5>
+                <h6>- 100</h6>
             </div>
+            <h1>Locate Better.</h1>
         </div>
-        <div class="hero-img-container">
-            <div class="hero-img"><img src="{{ url_for('static', filename='images/dashboard_screenshot.png') }}" alt="A screenshot of the LocateIQ dashboard interface."></div>
+        <div class="line">
+            <h1>Deliver Faster.</h1>
         </div>
-    </section>
-
-    <!-- Page 2 Section -->
-    <section class="page-2">
-        <!-- <video autoplay loop muted src="page2.mp4"></video> -->
-        <div class="page-2-content">
-            <h1>Unlock the Power of Precision</h1>
-            <p>Our platform provides a suite of features designed to give you complete control and insight over your assets. From real-time tracking to in-depth analytics, we've got you covered.</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">📍</div>
-                    <h3>Smart Location Analysis</h3>
-                    <p>AI-powered algorithms analyze multiple factors to find optimal warehouse locations</p>
+        <div class="line">
+            <h1>is loading right</h1>
+            <h2>Now</h2>
+        </div>
+    </div>
+    <div id="main">
+        <div id="page1" data-scroll data-scroll-speed="-1">
+            <video autoplay loop muted src="/static/images/assets/index.mp4"></video>
+            <div id="nav">
+                <img src="/static/images/assets/brand.png" style="width: 250px; height: 150px;">
+                <div id="nav-part2">
+                    <h4 id="nav-features">Features</h4>
+                    <h4 id="nav-about">About</h4>
+                    <h4 id="nav-contacts">Contacts</h4>
+                    <a href="/optimization">
+                        <h4 id="nav-get-started">Get Started</h4>
+                    </a>
                 </div>
-                <div class="feature-card">
-                    <div class="icon">📊</div>
-                    <h3>Cost<br> Optimization</h3>
-                    <p>Minimize operational costs while maximizing efficiency and delivery speed.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>Live Delivery Simulation</h3>
-                    <p>Simulate delivery routes in real-time to test different scenarios and identify efficient logistics strategies.</p>
-                </div>
-                <div class="feature-card"> 
-                    <div class="icon">🚛</div> 
-                    <h3>Logistics Integration</h3>
-                    <p>Seamlessly integrate with existing supply chain and transportation networks.</p> 
-                </div> 
-            </div> 
-        </div> 
-    </section>
+            </div>
+            <div class="hero" id="hero1">
+                <h1>We Deliver</h1>
+            </div>
+            <div class="hero" id="hero2">
+                <h1>Optimal</h1>
+            </div>
+            <div class="hero" id="hero3">
+                <h2>Location/</h2>
+                <h2>Chain</h2>
+            </div>
+            <div class="hero" id="hero4">
+                <h1>Efficiency</h1>
+            </div>
 
-    <!-- Advanced Capabilities Section -->
-    <section class="advanced-capabilities">
-        <h2>Advanced Capabilities</h2>
-        <p>Take your warehouse optimization to the next level</p>
-        <div class="capabilities-grid">
-            <div class="capability-card">
-                <div class="icon">👥</div>
-                <h3>Multi-store Management</h3>
-                <p>Handle multiple retail locations and distribution centers simultaneously</p>
-            </div>
-            <div class="capability-card">
-                <div class="icon">📈</div>
-                <h3>Demand Forecasting</h3>
-                <p>Predict future demand patterns to optimize warehouse capacity</p>
-            </div>
-            <div class="capability-card">
-                <div class="icon">⏱</div>
-                <h3>Delivery Time Optimization</h3>
-                <p>Calculate optimal locations for fastest delivery times to customers</p>
-            </div>
-            <div class="capability-card">
-                <div class="icon">✅</div>
-                <h3>Compliance Tracking</h3>
-                <p>Ensure all locations meet regulatory and zoning requirements</p>
+        </div>
+        <div id="page2" data-scroll data-scroll-speed="-2.5">
+            <div id="video-container">
+                <div id="video-cursor">
+                    <i class="ri-play-mini-fill"></i>
+                </div>
+                <video loop src="/static/images/assets/show-reel.mp4"></video>
             </div>
         </div>
-    </section>
-
-    <!-- Call-to-Action Footer -->
-    <section class="cta-footer">
-        <h2>Ready to Optimize Your Warehouse Network?</h2>
-        <p>Start your journey to smarter warehouse planning today</p>
-    </section>
-
-    <footer>
-        <div class="footer-logo">
-            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logobest.png') }}" alt="LocateIQ logo">LocateIQ.</a>
+        <div id="page3" data-scroll data-scroll-speed="-2.5">
+            <h1>OUR FEATURES</h1>
+            <div class="underline"></div>
+            <div id="image-div-container">
+                <div class="image-div">
+                    <img src="/static/images/assets/img1-1.jpg" alt="">
+                    <img src="/static/images/assets/img1-2.jpg" alt="">
+                </div>
+                <div class="image-div">
+                    <img src="/static/images/assets/img2-1.jpg" alt="">
+                    <img src="/static/images/assets/img2-2.jpg" alt="">
+                </div>
+                <div class="page3-circle1">
+                    <svg class="button__arrow" viewBox="0 0 91 118" fill="none">
+                        <path
+                            d="M15.2307 57.4152L15.9378 56.708L15.2307 56.0009L14.5236 56.708L15.2307 57.4152ZM34.9813 77.1658L34.2742 77.8729L35.9813 79.58L35.9813 77.1658L34.9813 77.1658ZM0.151478 72.4944L-0.555622 71.7873L-1.26273 72.4944L-0.555622 73.2015L0.151478 72.4944ZM45.29 117.633L44.5828 118.34L45.29 119.047L45.9971 118.34L45.29 117.633ZM60.3692 102.554L61.0763 103.261L61.7839 102.553L61.0758 101.846L60.3692 102.554ZM60.3685 102.553L59.6614 101.846L58.9538 102.553L59.6619 103.261L60.3685 102.553ZM90.427 72.4944L91.1341 73.2015L91.8412 72.4944L91.1341 71.7873L90.427 72.4944ZM75.3478 57.4152L76.0549 56.7081L75.3478 56.001L74.6407 56.7081L75.3478 57.4152ZM56.3065 76.4565L55.3065 76.4565L55.3065 78.8707L57.0136 77.1636L56.3065 76.4565ZM56.3065 0.120074L57.3065 0.120074L57.3065 -0.879926L56.3065 -0.879926L56.3065 0.120074ZM34.9813 0.120076L34.9813 -0.879924L33.9813 -0.879924L33.9813 0.120076L34.9813 0.120076ZM14.5236 58.1223L34.2742 77.8729L35.6884 76.4587L15.9378 56.708L14.5236 58.1223ZM0.858585 73.2015L15.9378 58.1223L14.5236 56.708L-0.555622 71.7873L0.858585 73.2015ZM45.9971 116.926L0.858585 71.7873L-0.555622 73.2015L44.5828 118.34L45.9971 116.926ZM59.662 101.846L44.5828 116.926L45.9971 118.34L61.0763 103.261L59.662 101.846ZM59.6619 103.261L59.6625 103.261L61.0758 101.846L61.0751 101.845L59.6619 103.261ZM61.0756 103.26L91.1341 73.2015L89.7199 71.7873L59.6614 101.846L61.0756 103.26ZM91.1341 71.7873L76.0549 56.7081L74.6407 58.1223L89.7199 73.2015L91.1341 71.7873ZM74.6407 56.7081L55.5994 75.7494L57.0136 77.1636L76.0549 58.1223L74.6407 56.7081ZM57.3065 76.4565L57.3065 0.120074L55.3065 0.120074L55.3065 76.4565L57.3065 76.4565ZM56.3065 -0.879926L34.9813 -0.879924L34.9813 1.12008L56.3065 1.12007L56.3065 -0.879926ZM33.9813 0.120076L33.9813 77.1658L35.9813 77.1658L35.9813 0.120076L33.9813 0.120076Z"
+                            fill="currentColor"></path>
+                    </svg>
+                    <div class="circle-in">
+                        <p>★ We’re thrilled to have you with us. We hope you’ve explored and enjoyed our features — and this is just the beginning of smarter solutions with LocateIQ ❤</p>
+                    </div>
+                </div>
+                <div class="page3-circle2">
+                    <svg class="button__arrow" viewBox="0 0 91 118" fill="none">
+                        <path
+                            d="M15.2307 57.4152L15.9378 56.708L15.2307 56.0009L14.5236 56.708L15.2307 57.4152ZM34.9813 77.1658L34.2742 77.8729L35.9813 79.58L35.9813 77.1658L34.9813 77.1658ZM0.151478 72.4944L-0.555622 71.7873L-1.26273 72.4944L-0.555622 73.2015L0.151478 72.4944ZM45.29 117.633L44.5828 118.34L45.29 119.047L45.9971 118.34L45.29 117.633ZM60.3692 102.554L61.0763 103.261L61.7839 102.553L61.0758 101.846L60.3692 102.554ZM60.3685 102.553L59.6614 101.846L58.9538 102.553L59.6619 103.261L60.3685 102.553ZM90.427 72.4944L91.1341 73.2015L91.8412 72.4944L91.1341 71.7873L90.427 72.4944ZM75.3478 57.4152L76.0549 56.7081L75.3478 56.001L74.6407 56.7081L75.3478 57.4152ZM56.3065 76.4565L55.3065 76.4565L55.3065 78.8707L57.0136 77.1636L56.3065 76.4565ZM56.3065 0.120074L57.3065 0.120074L57.3065 -0.879926L56.3065 -0.879926L56.3065 0.120074ZM34.9813 0.120076L34.9813 -0.879924L33.9813 -0.879924L33.9813 0.120076L34.9813 0.120076ZM14.5236 58.1223L34.2742 77.8729L35.6884 76.4587L15.9378 56.708L14.5236 58.1223ZM0.858585 73.2015L15.9378 58.1223L14.5236 56.708L-0.555622 71.7873L0.858585 73.2015ZM45.9971 116.926L0.858585 71.7873L-0.555622 73.2015L44.5828 118.34L45.9971 116.926ZM59.662 101.846L44.5828 116.926L45.9971 118.34L61.0763 103.261L59.662 101.846ZM59.6619 103.261L59.6625 103.261L61.0758 101.846L61.0751 101.845L59.6619 103.261ZM61.0756 103.26L91.1341 73.2015L89.7199 71.7873L59.6614 101.846L61.0756 103.26ZM91.1341 71.7873L76.0549 56.7081L74.6407 58.1223L89.7199 73.2015L91.1341 71.7873ZM74.6407 56.7081L55.5994 75.7494L57.0136 77.1636L76.0549 58.1223L74.6407 56.7081ZM57.3065 76.4565L57.3065 0.120074L55.3065 0.120074L55.3065 76.4565L57.3065 76.4565ZM56.3065 -0.879926L34.9813 -0.879924L34.9813 1.12008L56.3065 1.12007L56.3065 -0.879926ZM33.9813 0.120076L33.9813 77.1658L35.9813 77.1658L35.9813 0.120076L33.9813 0.120076Z"
+                            fill="currentColor"></path>
+                    </svg>
+                    <div class="circle-in">
+                        <p>★ We’re thrilled to have you with us. We hope you’ve explored and enjoyed our features — and this is just the beginning of smarter solutions with LocateIQ ❤</p>
+                    </div>
+                </div>
+                <div class="image-div">
+                    <img src="/static/images/assets/img3-1.jpg" alt="">
+                    <img src="/static/images/assets/img3-2.jpg" alt="">
+                </div>
+                <div class="image-div">
+                    <img src="/static/images/assets/img4-1.jpg" alt="">
+                    <img src="/static/images/assets/img4-2.jpg" alt="">
+                </div>
+            </div>
         </div>
-        <p>© 2025 LocateIQ. All rights reserved.</p>
-    </footer>
+        <div id="page4" data-scroll data-scroll-speed="2.5">
+            <div id="page4-content">
+                <h1>About LocateIQ</h1>
+                <div class="underline"></div>
+                <p>LocateIQ is built by people passionate about data, design, and intelligent solutions. More than just a platform, we are a team dedicated to transforming how businesses choose warehouse locations and optimize supply chains. We learn, innovate, and grow together — turning complex challenges into smarter, efficient outcomes worth celebrating.</p>
+                <div id="page4-flex">
+                    <img src="https://obys.agency/wp-content/uploads/2020/07/content-image01.jpg" alt="">
+                    <p>
+                        We are excited to introduce LocateIQ, our newly designed platform for smarter warehouse location decisions. Powered by AI, real-time traffic data, and weather insights, we help businesses optimize their supply chains with precision and efficiency.
+                        <br><br>
+                        Looking to enhance your logistics strategy or streamline warehouse operations?
+                        Say hello at info@locateiq.com↗ <br> — we’ll be happy to assist you.
+
+
+                    </p>
+                </div>
+                <div id="page4-blue-div">
+                    <div class="blue-div-elem">
+                        <h4>Nikita Chanda</h4>
+                        <p><b>Data Scientist(ML)</b><br> Develops AI algorithms for optimization.</p>
+                    </div>
+                    <div class="blue-div-elem">
+                        <h4>Bibek Panda</h4>
+                        <p><b>Frontend Developer</b><br>Builds Frontend and interactive responsive visualizations.</p>
+                    </div>
+                    <div class="blue-div-elem">
+                        <h4>Tanisha Yeasmin</h4>
+                        <p><b>UI/UX Designer</b><br>Designs user experience & manages Git.</p>
+                    </div>
+                    <div class="blue-div-elem">
+                        <h4>Pralay Ghosh</h4>
+                        <p><b>Backend Developer</b><br>Manages databases and server-side logic.</p>
+                    </div>
+                </div>
+                <div class="underline"></div>
+
+            </div>
+        </div>
+        <div id="page5" data-scroll data-scroll-speed="-2.5">
+            <div class="elem">
+                <h1><span>Logistics</span> - AI Analytics - Technology -</h1>
+                <h1><span>Logistics</span> - AI Analytics - Technology -</h1>
+            </div>
+            <div class="elem2">
+                <h1>Warehousing - <span>Optimization</span> - Real-Time -</h1>
+                <h1>Warehousing - <span>Optimization</span> - Real-Time -</h1>
+            </div>
+            <div class="elem">
+                <h1>Logistics - AI Analytics - <span>Technology</span> -</h1>
+                <h1>Logistics - AI Analytics - <span>Technology</span> -</h1>
+            </div>
+            <div class="elem2">
+                <h1><span>Warehousing</span> - Optimization - Real-Time -</h1>
+                <h1><span>Warehousing</span> - Optimization - Real-Time -</h1>
+            </div>
+        </div>
+        <div id="footer" data-scroll data-scroll-speed="-2.5">
+            <div id="footer-text">
+                <h1>Let's Connect</h1>
+                <h2>Let's Connect</h1>
+
+            </div>
+            <div class="underline"></div>
+            <div id="footer-div">
+                <div class="box">
+                    <h6>Socials</h6>
+                    <h5>Reddit</h5>
+                    <h5>Discord</h5>
+                    <h5>Instagram</h5>
+                    <h5>Facebook</h5>
+                    <h5>Twitter</h5>
+                    <h5>YouTube</h5>
+                </div>
+                <div class="box">
+                    <h6>Address</h6>
+                    <h5>Number 4, 
+                        Privet Drive, London🦉</h5>
+
+                </div>
+                <div class="box">
+                    <h6>Say Hi!</h6>
+                    <h5>info@LocateIQ.com</h5>
+                </div>
+            </div>
+            <div class="underline"></div>
+            <h5>LocateIQ © 2025</h5>
+        </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <!-- locomotive js  -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+
+    <!-- gsap cdn  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+        integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+    <!-- scrolltrigger cdn  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+        integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Three JS cdn  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+
+    <!-- controlKit for debunging -->
+    <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+
+    <!-- Shery JS cdn  -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/aayushchouhan24/sheryjs@main/dist/Shery.js"></script>
+
+    <!-- JavaScript file  -->
+    <script src="/static/js/script.js"></script>
 </body>
+
 </html>
