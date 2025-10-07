@@ -15,7 +15,7 @@ load_dotenv()  # Load environment variables from .env file
 app = Flask(__name__)
 CORS(app)
 
-# ------------------- Existing Code -------------------
+# ------------------- Data Loading -------------------
 required_store_cols = ['Store_ID', 'Name', 'Latitude', 'Longitude', 'City']
 required_warehouse_cols = ['Warehouse_ID', 'Name', 'Latitude', 'Longitude', 'Cost', 'Connectivity', 'Capacity', 'Ownership', 'City']
 
@@ -34,7 +34,7 @@ except Exception as e:
     warehouses_df = pd.DataFrame(columns=required_warehouse_cols)
 
 
-# ------------------- Existing Optimizer Class -------------------
+# ------------------- Optimizer Class -------------------
 class WarehouseOptimizer:
     def __init__(self, stores_df, warehouses_df):
         self.stores_df = stores_df
@@ -43,13 +43,11 @@ class WarehouseOptimizer:
     def calculate_distance(self, lat1, lng1, lat2, lng2):
         return geodesic((lat1, lng1), (lat2, lng2)).kilometers
 
-    # (Rest of your optimization methods remain unchanged...)
-    # ...
-
 
 optimizer = WarehouseOptimizer(stores_df, warehouses_df)
 
-# ------------------- New Map & LLM Integration -------------------
+
+# ------------------- Routes -------------------
 
 @app.route('/')
 def index():
@@ -87,35 +85,46 @@ def get_route_info():
         Answer briefly and clearly in structured JSON format.
         """
 
-        # Call Groq API
         GROQ_API_KEY = os.getenv("GROQ_API_KEY")
         if not GROQ_API_KEY:
             return jsonify({"error": "GROQ_API_KEY environment variable not set."}), 500
 
-        headers = {"Authorization": f"Bearer {GROQ_API_KEY}"}
-
-        payload = {
-            "model": "mixtral-8x7b",
-            "messages": [{"role": "user", "content": prompt}]
+        headers = {
+            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Content-Type": "application/json"
         }
 
-        response = requests.post("https://api.groq.com/openai/v1/chat/completions", json=payload, headers=headers)
-        groq_response = response.json()
+        payload = {
+            "model": "openai/gpt-oss-20b",  # Groq model from docs
+            "input": prompt
+        }
+
+        response = requests.post(
+            "https://api.groq.com/openai/v1/responses",  # Correct endpoint
+            headers=headers,
+            json=payload
+        )
+
         response.raise_for_status()
 
-        result_text = groq_response["choices"][0]["message"]["content"]
+        groq_response = response.json()
+        result_text = ""
+
+        # Groq API returns output inside output[0].content
+        if "output" in groq_response and len(groq_response["output"]) > 0:
+            result_text = groq_response["output"][0].get("content", "")
+
         return jsonify({"route_info": result_text})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 
-# ------------------- Existing Endpoints -------------------
 @app.route('/optimization')
 def optimization_page():
     return render_template('optimization.html')
 
-# (Your /api/optimize and /api/analytics routes remain same...)
 
+# ------------------- Run Server -------------------
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
