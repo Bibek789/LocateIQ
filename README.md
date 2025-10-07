@@ -1,33 +1,26 @@
-# LocateIQ - AI-Powered Warehouse Optimization Platform
+# LocateIQ - Interactive Logistics & Route Planning Platform
 
-**A comprehensive Flask-based warehouse optimization platform with machine learning integration, interactive mapping, and advanced analytics for supply chain optimization.**
+**A dynamic, Flask-based platform for interactive logistics planning, featuring real-time route calculation and AI-powered insights for supply chain optimization.**
 
 ## 🚀 Features
 
-### Core Functionality
-- **AI-Powered Optimization**: Multiple optimization algorithms including ML clustering
-- **Interactive West Bengal Map**: Real-time visualization with Leaflet.js
-- **Advanced Analytics**: Chart.js powered dashboards with comprehensive metrics
-- **Multiple Optimization Methods**: Distance, Cost, Capacity, and ML-based optimization
-- **Beautiful Animations**: GSAP-powered landing page with smooth scrolling
-- **Enhanced Map View**: Full-screen modal for detailed map interaction.
-### Machine Learning Integration
-- **K-means Clustering**: Intelligent store grouping for optimal warehouse placement
-- **Scikit-learn Integration**: Advanced ML algorithms for location optimization
-- **Predictive Analytics**: Data-driven insights for supply chain decisions
-- **Multi-criteria Optimization**: Balanced approach considering multiple factors
+### Interactive Route Planner
+- **Dynamic Map Interface**: Build and visualize logistics networks using Leaflet.js.
+- **Node & Edge Management**: Interactively add, manage, and delete warehouses, stores, and junctions directly on the map.
+- **Shortest Path Calculation**: Implements Dijkstra's algorithm to find the most efficient route between any two points.
+- **AI-Powered Route Insights**: Connects to the Groq API to provide real-time intelligence on selected routes, including estimated cost, traffic, and weather conditions.
+- **Data Persistence**: Load network layouts from CSV files to start your analysis quickly.
 
-### Advanced Capabilities
-- **Real-time Data Processing**: Live optimization calculations
-- **Interactive Dashboard**: Multi-section interface with navigation
-- **Responsive Design**: Mobile-first approach with modern UI
-- **Data Visualization**: Charts, graphs, and interactive maps
-- **Store Management**: Complete CRUD operations for retail locations
+### Core Optimization Engine (Legacy)
+- **ML-Powered Optimization**: Utilizes K-means clustering for intelligent warehouse placement.
+- **Multi-Criteria Analysis**: Optimizes based on distance, cost, and capacity.
+- **Advanced Analytics Dashboard**: Visualizes key metrics with Chart.js.
 
 ## 🛠️ Technology Stack
 
 ### Backend
 - **Flask**: Python web framework
+- **Groq**: High-speed LLM inference for AI-powered insights
 - **Pandas**: Data manipulation and analysis
 - **NumPy**: Numerical computing
 - **Scikit-learn**: Machine learning algorithms
@@ -35,43 +28,43 @@
 ### Frontend
 - **HTML5/CSS3**: Modern web standards
 - **JavaScript ES6+**: Interactive functionality
-- **Chart.js**: Data visualization
 - **Leaflet.js**: Interactive maps
-- **GSAP**: Advanced animations
-- **Lenis**: Smooth scrolling
 
-### Data & Analytics
-- **CSV Data Storage**: Store and warehouse information
-- **Geospatial Analysis**: Location-based calculations
-- **Statistical Analysis**: Performance metrics and data visualization
-- **Real-time Processing**: Live optimization results
+### Environment
+- **Python-dotenv**: Secure management of environment variables like API keys.
 
 ## 📦 Installation & Setup
 
 ### Prerequisites
 - Python 3.8 or higher
 - pip package manager
+- A Groq API key
 
 ### Installation Steps
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/your-username/LocateIQ.git
    cd LocateIQ
    ```
-1. **Install Python dependencies**:
+2. **Install Python dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
+3. **Set up environment variables**:
+   - Create a file named `.env` in the root directory.
+   - Add your Groq API key to it:
+     ```
+     GROQ_API_KEY="your_groq_api_key_here"
+     ```
 
-2. **Start the Flask development server**:
+4. **Start the Flask development server**:
    ```bash
    python app.py
    ```
 
-3. **Access the application**:
+5. **Access the application**:
    - Open your browser and navigate to `http://localhost:5000`
-   - The application will be available with all features.
 
 ## 🏗️ Project Structure
 
