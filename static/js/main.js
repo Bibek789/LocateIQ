@@ -368,12 +368,6 @@ function initializeApp() {
   });
 
   document.getElementById('loadSample').addEventListener('click', () => {
-    nodes = [];
-    edges = [];
-    Object.values(markers).forEach(marker => map.removeLayer(marker));
-    markers = {};
-    Object.values(polylines).forEach(line => map.removeLayer(line));
-    polylines = {};
     if (confirm('This will clear the current map and load data from the CSV files. Continue?')) {
       // Clear existing data
       nodes = [];
@@ -382,61 +376,33 @@ function initializeApp() {
       markers = {};
       Object.values(polylines).forEach(line => map.removeLayer(line));
       polylines = {};
+      
+      startNode = null;
+      endNode = null;
+      shortestPath = [];
 
-    // Sample data based on warehouse and store locations in India
-    const sampleNodes = [
-      { name: 'Warehouse Mumbai', type: 'warehouse', lat: 19.0760, lng: 72.8777 },
-      { name: 'Warehouse Delhi', type: 'warehouse', lat: 28.7041, lng: 77.1025 },
-      { name: 'Warehouse Bangalore', type: 'warehouse', lat: 12.9716, lng: 77.5946 },
-      { name: 'Store Pune', type: 'store', lat: 18.5204, lng: 73.8567 },
-      { name: 'Store Jaipur', type: 'store', lat: 26.9124, lng: 75.7873 },
-      { name: 'Store Chennai', type: 'store', lat: 13.0827, lng: 80.2707 },
-      { name: 'Junction Nagpur', type: 'junction', lat: 21.1458, lng: 79.0882 },
-      { name: 'Junction Hyderabad', type: 'junction', lat: 17.3850, lng: 78.4867 }
-    ];
       resultDiv.textContent = 'Loading data from CSV files...';
       resultDiv.className = '';
 
-    const nodeIds = {};
-    sampleNodes.forEach(node => {
-      const id = addNode(node.name, node.type, node.lat, node.lng);
-      nodeIds[node.name] = id;
-    });
-
-    // Sample edges connecting the locations
-    const sampleEdges = [
-      { from: 'Warehouse Mumbai', to: 'Store Pune', weight: 150 },
-      { from: 'Warehouse Mumbai', to: 'Junction Nagpur', weight: 850 },
-      { from: 'Warehouse Delhi', to: 'Store Jaipur', weight: 270 },
-      { from: 'Warehouse Delhi', to: 'Junction Nagpur', weight: 1080 },
-      { from: 'Warehouse Bangalore', to: 'Store Chennai', weight: 350 },
-      { from: 'Warehouse Bangalore', to: 'Junction Hyderabad', weight: 570 },
-      { from: 'Junction Nagpur', to: 'Junction Hyderabad', weight: 500 },
-      { from: 'Junction Hyderabad', to: 'Store Chennai', weight: 630 }
-    ];
-
-    sampleEdges.forEach(edge => {
-      addEdge(nodeIds[edge.from], nodeIds[edge.to], edge.weight);
-    });
-
-    startNode = null;
-    endNode = null;
-    shortestPath = [];
-
-    map.setView([20.5937, 78.9629], 5); // Centered on India
-
-    resultDiv.textContent = 'Sample India network loaded! Click on a warehouse and then a store to find the route.';
-    resultDiv.className = '';
+      // Load data from CSV files via API
       fetch('/api/locations')
         .then(response => response.json())
         .then(data => {
           if (data.error) throw new Error(data.error);
+          
+          // Add all locations from CSV
           data.forEach(location => {
-            addNode(location.Name, location.type, location.Latitude, location.Longitude);
+            addNode(location.name, location.type, location.lat, location.lng);
           });
-          resultDiv.textContent = `Successfully loaded ${data.length} locations from CSV files.`;
+          
+          // Calculate center point for map view (Kolkata area)
+          const centerLat = 22.5726;
+          const centerLng = 88.3639;
+          
+          map.setView([centerLat, centerLng], 10); // Zoom in on Kolkata
+          
+          resultDiv.textContent = `Successfully loaded ${data.length} locations from CSV files! Click on a warehouse (blue) and then a store (orange) to find the route.`;
           resultDiv.className = 'success';
-          map.setView([20.5937, 78.9629], 5); // Recenter on India
         })
         .catch(error => {
           resultDiv.textContent = `Error loading data: ${error.message}`;
@@ -482,66 +448,154 @@ function initializeApp() {
     const startNodeObj = nodes.find(n => n.id === startNode);
     const endNodeObj = nodes.find(n => n.id === endNode);
 
-    const graph = buildGraph();
-    const result = dijkstra(graph, startNode, endNode);
+    resultDiv.textContent = 'Calculating optimal route with AI insights...';
+    resultDiv.className = '';
 
-    if (result.path.length === 0 || result.distance === Infinity) {
-      resultDiv.textContent = 'No route found between these locations!';
-      resultDiv.className = 'error';
-      shortestPath = [];
+    // Use new comprehensive routing API
+    const payload = {
+      waypoints: [
+        {
+          id: startNodeObj.id,
+          lat: startNodeObj.lat,
+          lng: startNodeObj.lng,
+          name: startNodeObj.name
+        },
+        {
+          id: endNodeObj.id,
+          lat: endNodeObj.lat,
+          lng: endNodeObj.lng,
+          name: endNodeObj.name
+        }
+      ],
+      optimize: false,
+      vehicle: {
+        mpg: 25, // Default fuel efficiency
+        fuel_price_inr_per_l: 100 // Default fuel price
+      }
+    };
+
+    fetch('/api/route', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      const route = data.route;
+      const legs = data.legs;
+      const ai_insights = data.ai_insights;
+
+      // Draw route on map using geometry from backend
       if (pathPolyline) {
         map.removeLayer(pathPolyline);
         pathPolyline = null;
       }
-    } else {
-      shortestPath = result.path;
-      drawShortestPath(result.path);
 
-      // --- LLM Integration ---
-      resultDiv.textContent = 'Fetching route insights from AI...';
-      resultDiv.className = '';
+      if (route.geometry && route.geometry.length > 0) {
+        pathPolyline = L.polyline(route.geometry, {
+          color: '#28a745',
+          weight: 6,
+          opacity: 0.8
+        }).addTo(map);
 
-      const payload = {
-        start: { lat: startNodeObj.lat, lng: startNodeObj.lng },
-        end: { lat: endNodeObj.lat, lng: endNodeObj.lng }
-      };
+        map.fitBounds(pathPolyline.getBounds(), { padding: [50, 50] });
+      }
 
-      fetch('/api/route_info', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          throw new Error(data.error);
-        }
+      // Display comprehensive route information
+      let routeInfo = `
+        <div class="route-info">
+          <h4>🚛 Route: ${startNodeObj.name} → ${endNodeObj.name}</h4>
+          <div class="route-stats">
+            <div class="stat">
+              <span class="label">Distance:</span>
+              <span class="value">${ai_insights.distance_km} km</span>
+            </div>
+            <div class="stat">
+              <span class="label">Duration:</span>
+              <span class="value">${Math.round(route.duration_s / 60)} min</span>
+            </div>
+            <div class="stat">
+              <span class="label">ETA:</span>
+              <span class="value">${new Date(ai_insights.eta).toLocaleTimeString()}</span>
+            </div>
+            <div class="stat">
+              <span class="label">Fuel Cost:</span>
+              <span class="value">₹${ai_insights.estimated_fuel_cost_inr}</span>
+            </div>
+            <div class="stat">
+              <span class="label">Congestion:</span>
+              <span class="value">${Math.round(ai_insights.congestion_score * 100)}%</span>
+            </div>
+            <div class="stat">
+              <span class="label">Confidence:</span>
+              <span class="value">${ai_insights.route_confidence ? '✅ High' : '⚠️ Low'}</span>
+            </div>
+          </div>
+      `;
 
-        // Safely extract the AI's message content
-        let aiContent = data.route_info;
-        if (data.choices && data.choices.length > 0 && data.choices[0].message) {
-          aiContent = data.choices[0].message.content;
-        } else if (typeof data.route_info === 'object') {
-          // If route_info is an object but not the expected format, stringify it for display.
-          aiContent = JSON.stringify(data.route_info, null, 2);
-        }
+      // Add turn-by-turn directions if available
+      if (legs.length > 0 && legs[0].steps && legs[0].steps.length > 0) {
+        routeInfo += `
+          <div class="turn-by-turn">
+            <h5>🗺️ Turn-by-Turn Directions:</h5>
+            <ol class="directions-list">
+        `;
+        
+        legs[0].steps.forEach((step, index) => {
+          if (step.instruction && step.instruction !== 'Arrive at destination') {
+            routeInfo += `<li>${step.instruction}</li>`;
+          }
+        });
+        
+        routeInfo += `
+            </ol>
+          </div>
+        `;
+      }
 
-        const pathNames = result.path.map(id => nodes.find(n => n.id === id).name).join(' → ');
-        let llmResponse;
-        try {
-          llmResponse = JSON.parse(aiContent);
-        } catch (e) {
-          llmResponse = { "Raw Response": aiContent };
-        }
+      // Add AI insights notes
+      if (ai_insights.notes && ai_insights.notes.length > 0) {
+        routeInfo += `
+          <div class="ai-notes">
+            <h5>🤖 AI Insights:</h5>
+            <ul>
+        `;
+        ai_insights.notes.forEach(note => {
+          routeInfo += `<li>${note}</li>`;
+        });
+        routeInfo += `
+            </ul>
+          </div>
+        `;
+      }
 
-        resultDiv.innerHTML = `<strong>Route:</strong> ${pathNames}<br><strong>Distance:</strong> ${result.distance} km<br><hr><strong>AI Insights:</strong><br><strong>Est. Distance:</strong> ${llmResponse.estimated_distance || 'N/A'}<br><strong>Est. Cost:</strong> ${llmResponse.average_travel_cost || 'N/A'}<br><strong>Traffic:</strong> ${llmResponse.current_traffic_condition || 'N/A'}<br><strong>Weather:</strong> ${llmResponse.current_weather_condition || 'N/A'}`;
-        resultDiv.className = 'success';
-      })
-      .catch(error => {
-        resultDiv.textContent = `Could not fetch AI insights: ${error.message}`;
-        resultDiv.className = 'error';
-      });
-    }
+      // Add human summary if available
+      if (ai_insights.human_summary) {
+        routeInfo += `
+          <div class="ai-summary">
+            <h5>💬 AI Summary:</h5>
+            <p>${ai_insights.human_summary}</p>
+          </div>
+        `;
+      }
+
+      routeInfo += `</div>`;
+
+      resultDiv.innerHTML = routeInfo;
+      resultDiv.className = 'success';
+
+      // Update shortestPath for compatibility
+      shortestPath = [startNode, endNode];
+    })
+    .catch(error => {
+      console.error('Route calculation error:', error);
+      resultDiv.textContent = `Could not calculate route: ${error.message}`;
+      resultDiv.className = 'error';
+    });
   });
 
   resetBtn.addEventListener('click', () => {
