@@ -1,3 +1,54 @@
+window.addEventListener("load", () => {
+    const progressLine = document.getElementById("progress-line");
+    const progressText = document.getElementById("progress-text");
+    const loader = document.getElementById("loader");
+    const loadingMsg = document.getElementById("loading-msg");
+    const horizontalLine = document.querySelector(".horizontal-line");
+    const h1Text = document.querySelector(".loader-text h1"); // grab the H1
+
+    const lineWidth = horizontalLine.getBoundingClientRect().width;
+    let progress = { value: 0 };
+
+    // Initial H1 position: slightly below its final position
+    gsap.set(h1Text, { opacity: 0, y: 40 });
+
+    const tl = gsap.timeline({
+        onUpdate: () => {
+            // Fill the bar
+            progressLine.style.width = progress.value + "%";
+
+            // Move percentage text along the bar
+            const pos = (lineWidth * progress.value) / 100;
+            const maxPos = lineWidth - progressText.offsetWidth;
+            progressText.style.left = Math.min(pos, maxPos) + "px";
+
+            // Update percentage text
+            progressText.innerText = Math.floor(progress.value) + "%";
+        },
+        onComplete: () => {
+            // Fade in small loading message
+            gsap.to(loadingMsg, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
+
+            // Fade out loader
+            gsap.to(loader, {
+                opacity: 0,
+                delay: 0.8,
+                duration: 0.5,
+                onComplete: () => loader.style.display = "none"
+            });
+        }
+    });
+
+    // 1️⃣ H1 pops smoothly while bar starts
+    tl.to(h1Text, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0);
+
+    // 2️⃣ Bar animation with 69% pause
+    tl.to(progress, { value: 69, duration: 0.5, ease: "power2.inOut" }, 0)   // start together with H1
+      .to(progress, { value: 69, duration: 0.25 }, 1)                      // pause at 69%
+      .to(progress, { value: 100, duration: 0.4, ease: "power2.inOut" }, 1.5); // finish fast
+});
+
+
 function locomotiveAnimation() {
   gsap.registerPlugin(ScrollTrigger);
 

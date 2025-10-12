@@ -13,28 +13,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aayushchouhan24/sheryjs@main/dist/Shery.css" />
     <!-- remixicon cdn  -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+     <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
     <!-- css file  -->
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
 
-    <div id="loader">
-        <div class="line">
-            <div id="line1-part1">
-                <h5>00</h5>
-                <h6>- 100</h6>
-            </div>
-            <h1>Locate Better.</h1>
+<div id="loader">
+    <div class="loader-wrapper">
+        <div class="loader-text">
+            <h1>LocateIQ - Powered by AI.</h1>
         </div>
-        <div class="line">
-            <h1>Deliver Faster.</h1>
+
+        <div class="horizontal-line">
+            <div class="progress-line" id="progress-line"></div>
+            <span id="progress-text">0%</span>
         </div>
-        <div class="line">
-            <h1>is loading right</h1>
-            <h2>Now</h2>
-        </div>
+
+        <p id="loading-msg">Loading ....</p>
     </div>
+</div>
+
+
+
     <div id="main">
         <div id="page1" data-scroll data-scroll-speed="-1">
             <video autoplay loop muted src="/static/images/assets/index.mp4"></video>

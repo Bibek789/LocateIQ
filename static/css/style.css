@@ -45,13 +45,85 @@ body {
 }
 
 #loader {
-    height: 100%;
-    width: 100%;
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #161821;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     z-index: 9999;
-    background-color: #030303;
-    padding: 25vh 10vw;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
+
+.loader-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 92%;
+}
+
+.loader-text h1 {
+    color: #e2e2e2;
+    font-size: 3 rem;
+    font-weight: 550;
+    margin-bottom: 15px;
+    letter-spacing: -0.9px;
+     background: linear-gradient(90deg, #f6faff, #98ecff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 8px rgba(0, 200, 255, 0.458);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.horizontal-line {
+    width: 100%;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    position: relative; /* crucial for absolute children */
+}
+
+.progress-line {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    box-shadow: 0 0 8px rgba(0,198,255,0.7);
+    border-radius: 2px;
+    left: 0%;
+    right: 95%;
+}
+
+#progress-text {
+    position: absolute;
+    top: -9px; /* above the bar */
+    left: 0;    /* starting point */
+    right: 100%;
+    color: #ffc400;
+    font-weight: 1000;
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 10;
+    display: block; /* ensure visibility */
+}
+
+#loading-msg {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: -0.5px;
+    opacity: 0;
+}
+
+
 
 .line {
     /* background-color: red; */
@@ -273,12 +345,12 @@ body {
 }
 
 .hero h1 {
-    font-size: 7.2vw;
+    font-size: 5vw;
     font-weight: 600;
     text-transform: uppercase;
     line-height: 7.2vw;
     position: relative;
-    color: #000;
+    color: #d49c1a;
 }
 
 #hero1::before {
