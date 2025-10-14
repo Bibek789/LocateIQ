@@ -88,16 +88,29 @@ function locomotiveAnimation() {
   // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
   ScrollTrigger.refresh();
 
-  // Add navigation scrolling
+  // Navigation and Hamburger Menu Animation
   function navAnimation() {
-    document.querySelector("#nav-features").addEventListener("click", () => {
-      locoScroll.scrollTo("#page3");
+    const hamburger = document.querySelector("#nav-hamburger");
+    const navLinks = document.querySelector("#nav-part2");
+    const links = document.querySelectorAll("#nav-part2 a");
+
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navLinks.classList.toggle("active");
     });
-    document.querySelector("#nav-about").addEventListener("click", () => {
-      locoScroll.scrollTo("#page4");
-    });
-    document.querySelector("#nav-contacts").addEventListener("click", () => {
-      locoScroll.scrollTo("#footer");
+
+    links.forEach(link => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        // Only handle internal anchor links
+        if (href.startsWith("#")) {
+          e.preventDefault();
+          locoScroll.scrollTo(href);
+          // Close the menu on mobile after clicking a link
+          hamburger.classList.remove("active");
+          navLinks.classList.remove("active");
+        }
+      });
     });
   }
   navAnimation();
@@ -228,12 +241,12 @@ function flagAnimation() {
       y: dets.y
     })
   })
-  document.querySelector("#hero3").addEventListener("mouseenter", function () {
+  document.querySelector("#page3").addEventListener("mouseenter", function () {
     gsap.to("#flag", {
       opacity: 1
     })
   })
-  document.querySelector("#hero3").addEventListener("mouseleave", function () {
+  document.querySelector("#page3").addEventListener("mouseleave", function () {
     gsap.to("#flag", {
       opacity: 0
     })

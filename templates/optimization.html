@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="/static/images/assets/favicon.png" type="image/x-icon">
     <!-- stylesheets -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- remixicon cdn  -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/optimization.css">
     <script type="importmap">
       {
@@ -19,7 +21,15 @@
   </head>
   <body>
     <div id="app">
-      <h1>LocateIQ</h1>
+      <header class="app-header">
+        <a href="http://localhost:8501" target="_blank" rel="noopener noreferrer" id="dashboard-link" title="Go to Dashboard">
+          <span>Dashboard</span> <i class="ri-arrow-right-up-line"></i>
+        </a>
+        <h1>LocateIQ - Route Optimization</h1>
+        <a href="/" id="dashboard-link" title="Go to Dashboard">
+          <span>Voice Assistant</span> <i class="ri-arrow-right-up-line"></i>
+        </a>
+      </header>
 
       <div class="input-section">
         <div class="input-panel">

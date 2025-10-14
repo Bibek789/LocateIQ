@@ -16,7 +16,12 @@
 - **Multi-Criteria Analysis**: Optimizes based on distance, cost, and capacity.
 - **Advanced Analytics Dashboard**: Visualizes key metrics with Chart.js.
 
-## 🛠️ Technology Stack
+### 📈 Demand Forecasting Dashboard
+- **Interactive UI**: Built with Streamlit for easy filtering and analysis.
+- **Demand Forecasting**: Simple moving average model to predict future demand for items at any store or warehouse.
+- **Shortage Alerts**: Automatically calculates and highlights potential inventory shortages based on forecasts and current stock.
+
+## ️ Technology Stack
 
 ### Backend
 - **Flask**: Python web framework
@@ -24,6 +29,7 @@
 - **Pandas**: Data manipulation and analysis
 - **NumPy**: Numerical computing
 - **Scikit-learn**: Machine learning algorithms
+- **Streamlit**: Interactive data dashboarding
 
 ### Frontend
 - **HTML5/CSS3**: Modern web standards
@@ -59,10 +65,16 @@
      ```
 
 4. **Start the Flask development server**:
+   This runs the main route planning application.
    ```bash
    python app.py
    ```
 
+5. **(New) Start the Streamlit Forecasting Dashboard**:
+   Open a new terminal in the project root and run:
+   ```bash
+   streamlit run dashboard.py
+   ```
 5. **Access the application**:
    - Open your browser and navigate to `http://localhost:5000`
 
@@ -73,11 +85,14 @@ LocateIQ/
 ├── app.py                      # Main Flask application
 ├── requirements.txt            # Python dependencies
 ├── data/
-│   ├── stores.csv             # Store location data
-│   └── warehouses.csv         # Warehouse information
+│   ├── stores.csv              # Store location data
+│   ├── warehouses.csv          # Warehouse information
+│   ├── historical_sales.csv    # (New) Sample sales data
+│   └── inventory.csv           # (New) Sample inventory data
 ├── templates/                 # HTML templates
 │   ├── index.html             # Landing page
 │   └── Optimization.html      # Main dashboard
+├── dashboard.py                # (New) Streamlit forecasting dashboard
 ├── static/
 │   ├── css/
 │   │   ├── style.css          # Main styles
@@ -95,6 +110,13 @@ LocateIQ/
 1. **Explore Features**: Scroll through animated sections showcasing capabilities
 2. **Navigate**: Use the navigation bar to explore different sections
 3. **Get Started**: Click "Get Started" to access the dashboard
+
+### Forecasting Dashboard
+1. **Run the Dashboard**: `streamlit run dashboard.py`
+2. **Select Location**: Use the sidebar to choose a store or warehouse.
+3. **Select Item**: Pick an item to analyze from the dropdown.
+4. **View Forecast**: The main panel will show a chart of historical vs. forecasted demand.
+5. **Check Shortages**: The shortage analysis table shows projected stock levels and highlights potential issues.
 
 ### Dashboard Features
 
