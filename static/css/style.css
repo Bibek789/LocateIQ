@@ -350,7 +350,7 @@ body {
     text-transform: uppercase;
     line-height: 7.2vw;
     position: relative;
-    color: #d49c1a;
+    color: #a07207;
 }
 
 #hero1::before {
@@ -617,19 +617,24 @@ body {
     opacity: 1;
 }
 
-
-
-
-#page4 {
-    min-height: 100vh;
-    position: relative;
-    width: 100%;
-    /* background-color: rgb(61, 61, 61); */
-    padding: 7vh 0;
+.team-photo {
+  width: 300px; /* you can adjust the size */
+  border-radius: 22px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+.team-photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Removed invalid selector block that had only '#' */
+
 #page4-content {
-    width: 72vw;
+    width: 75vw;
     position: relative;
 
     margin-left: 28%;
@@ -640,7 +645,17 @@ body {
     text-transform: uppercase;
     position: relative;
 }
-
+slide-in {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideIn 1.2s ease forwards;
+}
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 #page4-content h1::before {
     content: "03";
     position: absolute;
@@ -675,18 +690,26 @@ body {
 }
 
 #page4-flex p {
-    font-size: 0.9vw;
-    width: 19%;
-    margin-left: 1vw;
+    font-size: 1vw;
+    line-height: 120%;
+    width: 22%;
+    margin-left: 2vw;
 }
 
 #page4-blue-div {
     background-color: #3F7DF4;
-    width: 33vw;
-    padding: 3vw;
+    width: 35vw;
+    padding: 2.5vw;
     position: relative;
     margin-top: -35vh;
     margin-left: 26vw;
+    border-radius: 22px;
+    filter: grayscale(25%);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+#page4-blue-div:hover {
+    filter: grayscale(0%);
+    transform: scale(1.02);
 }
 
 .blue-div-elem {
@@ -705,13 +728,13 @@ body {
 }
 
 .blue-div-elem h4 {
-    font-size: 1.4vw;
+    font-size: 1.5vw;
     font-weight: 500;
 }
 
 .blue-div-elem p {
     width: 40%;
-    font-size: 0.8vw;
+    font-size: 1vw;
 }
 
 #page5 {
