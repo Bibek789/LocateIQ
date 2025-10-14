@@ -4,5 +4,8 @@ pandas
 numpy
 scikit-learn
 folium
-plotly
+polyline
 geopy
+requests
+python-dotenv
+streamlit

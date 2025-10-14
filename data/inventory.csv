@@ -1,0 +1,5 @@
+Location_ID,Location_Type,Item_ID,Item_Name,Current_Stock
+S1,store,ITEM001,Gadget A,50
+S1,store,ITEM002,Gadget B,80
+W1,warehouse,ITEM001,Gadget A,500
+W2,warehouse,ITEM002,Gadget B,750
